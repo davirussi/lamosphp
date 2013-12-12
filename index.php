@@ -3,132 +3,87 @@
 <body>
 
 
-<?php
-    // Note que !== não existia antes do PHP 4.0.0-RC2
+<?php include "loader.php"?>
 
-    $arquivosbase = array();
+<?php echo 'Manipulador'?>
 
-    if ($handle = opendir('base/')) {
-        echo "Manipulador de diretório: $handle\n";
-        echo "Arquivos:\n";
+    <form name="combinador" action="index.php" method="get">
+        <select name="base">
+            <?php 
+                foreach ($arquivosbase as &$elemento )
+                { 
+                    echo '<option value="'.$elemento.'">'.$elemento.'</option>';
+                }
+            ?>
+        </select>
+        <select name="camada">
+            <?php 
+                foreach ($arquivoscamada as &$elemento )
+                { 
+                    echo '<option value="'.$elemento.'">'.$elemento.'</option>';
+                }
+            ?>
+        </select>
+        <select name="camada2">
+            <?php 
+                foreach ($arquivoscamada as &$elemento )
+                { 
+                    echo '<option value="'.$elemento.'">'.$elemento.'</option>';
+                }
+            ?>
+        </select>
+        
+        <input type="hidden" name="tempo" value="<?php echo time() ?>">
 
-        /* Esta é a forma correta de varrer o diretório */
-        $i = 0;
-        while (false !== ($file = readdir($handle))) {
-            #echo "$file\n";
-            if (strcmp($file,".")!=0 and strcmp($file,"..")!=0)
-            {
-                $arquivosbase[$i]=$file;
-                $i+=1;
-            } 
-        }
-        closedir($handle);
-    }
-?>
-
-<?php
-    // Note que !== não existia antes do PHP 4.0.0-RC2
-
-    $arquivoscamada = array();
-
-    if ($handle = opendir('camada/')) {
-        echo "Manipulador de diretório: $handle\n";
-        echo "Arquivos:\n";
-
-        /* Esta é a forma correta de varrer o diretório */
-        $i = 0;
-        while (false !== ($file = readdir($handle))) {
-            #echo "$file\n";
-            if (strcmp($file,".")!=0 and strcmp($file,"..")!=0)
-            {
-                $arquivoscamada[$i]=$file;
-                $i+=1;
-            } 
-        }
-        closedir($handle);
-    }
-?>
-
-
-<form name="combinador" action="index.php" method="get">
-    <select name="base">
-        <?php 
-            foreach ($arquivosbase as &$elemento )
-            { 
-                echo '<option value="'.$elemento.'">'.$elemento.'</option>';
-            }
-        ?>
-    </select>
-    <select name="camada">
-        <?php 
-            foreach ($arquivoscamada as &$elemento )
-            { 
-                echo '<option value="'.$elemento.'">'.$elemento.'</option>';
-            }
-        ?>
-    </select>
-    
-    <input name="submitb" type="submit" value="Submit">
-</form>
+        <input name="submitb" type="submit" value="Submit">
+    </form>
 
 <?php 
     if (isset($_GET['submitb'])) 
     {
-        try
-        { 
-            $dir = $_SERVER['DOCUMENT_ROOT'];
-            
-            echo $dir . '/imagen/frame.png';
-            // Let's check whether we can perform the magick. 
-            if (TRUE !== extension_loaded('imagick')) 
-            { 
-                throw new Exception('Imagick extension is not loaded.'); 
-            } 
-
-            // This check is an alternative to the previous one. 
-            // Use the one that suits you better. 
-            if (TRUE !== class_exists('Imagick')) 
-            { 
-                throw new Exception('Imagick class does not exist.'); 
-            } 
-
-
-
-            // Let's read the images. 
-            $glasses = new Imagick(); 
-            if (FALSE === $glasses->readImage($dir . '/camada/frame.png')) 
-            { 
-                throw new Exception(); 
-            } 
-
-            $face = new Imagick(); 
-            if (FALSE === $face->readImage($dir . '/base/base.jpeg')) 
-            { 
-                throw new Exception(); 
-            } 
-
-            // Let's put the glasses on (10 pixels from left, 20 pixels from top of face). 
-            $face->compositeImage($glasses, Imagick::COMPOSITE_DEFAULT, 10, 20); 
-
-            // Let's merge all layers (it is not mandatory). 
-            $face->flattenImages(); 
-
-            // We do not want to overwrite face.jpg. 
-            $face->setImageFileName($dir . '/temp/face_and_glasses2.jpg'); 
-
-            // Let's write the image. 
-            if  (FALSE == $face->writeImage()) 
-            { 
-                throw new Exception(); 
-            } 
-        } 
-        catch (Exception $e) 
-        { 
-            echo 'Caught exception: ' . $e->getMessage() . "\n"; 
-        } 
+        $dir = $_SERVER['DOCUMENT_ROOT'];
+        if (strcmp($_GET['camada'],"")==0){
+            $frame = '/camada/clean.png';
+        }
+        else{
+            $frame = '/camada/'.$_GET['camada'];
+        }
+        
+        if (strcmp($_GET['camada2'],"")==0){
+            $frame2 = '/camada/clean.png';
+        }
+        else{
+            $frame2 = '/camada/'.$_GET['camada2'];
+        }
+        #$frame = '/camada/frame.png';
+        #$base = '/base/base.jpeg';
+        $base = '/base/'.$_GET['base'];
+        $saida = '/temp/'.$_GET['tempo'].$_SERVER['REMOTE_ADDR'].'.jpg';       
+        include "combiner.php";
     }
-     
+    if (isset($_GET['tempo']))
+    {
+        echo "<img src='$saida' alt='some_text' width='400' height='400'>";
+    
+    }
+    
+    $gl = new Imagick(); 
+
+    #$bgImage = new Imagick('camada.gif');
+    #echo ($_SERVER['DOCUMENT_ROOT'] . '/camada.gif');
+    #$image = new Imagick($_SERVER['DOCUMENT_ROOT'] . '/camada.gif');
+    
+    
 ?> 
+
+<?php
+
+/* Create a new imagick object and read in GIF */
+$image = new Gmagick('base.jpeg');
+
+/* Notice writeImages instead of writeImage */
+
+?>
 
 </body>
 </html>

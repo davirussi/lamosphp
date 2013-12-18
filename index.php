@@ -3,19 +3,59 @@
 <body>
 
 
-<?php include "loader.php"?>
+<?php include "dir_loader.php"?>
+<?php include "camada.php"?>
+
 
 <?php echo 'Manipulador'?>
 
     <form name="combinador" action="index.php" method="get">
-        <select name="base">
-            <?php 
-                foreach ($arquivosbase as &$elemento )
+        <select name="Data">
+            <?php
+                #ler diretorio com as datas
+                foreach ($dir_data as &$elemento )
                 { 
                     echo '<option value="'.$elemento.'">'.$elemento.'</option>';
                 }
             ?>
         </select>
+        <select name="Regiao">
+            <?php
+                #ler diretorio com as regioes
+                foreach ($dir_regiao as &$elemento )
+                { 
+                    echo '<option value="'.$elemento.'">'.$elemento.'</option>';
+                }
+            ?>
+        </select>
+        <select name="Hora">
+            <?php
+                #ler diretorio com as regioes
+                foreach ($dir_hora as &$elemento )
+                { 
+                    echo '<option value="'.$elemento.'">'.$elemento.'</option>';
+                }
+            ?>
+        </select>
+        <select name="Nivel">
+            <?php
+                #ler diretorio com as regioes
+                foreach ($dir_nivel as &$elemento )
+                { 
+                    echo '<option value="'.$elemento.'">'.$elemento.'</option>';
+                }
+            ?>
+        </select>               
+        
+
+            <?php 
+                foreach ($camada1 as &$elemento )
+                { 
+                   
+                    echo '<input type="radio" value="'.$elemento.'" name="group1">'.$elemento;
+                }
+            ?>
+      
         <select name="camada">
             <?php 
                 foreach ($arquivoscamada as &$elemento )
@@ -67,7 +107,7 @@
     
     }
     
-    $gl = new Imagick(); 
+    #$gl = new Imagick(); 
 
     #$bgImage = new Imagick('camada.gif');
     #echo ($_SERVER['DOCUMENT_ROOT'] . '/camada.gif');
@@ -76,14 +116,6 @@
     
 ?> 
 
-<?php
-
-/* Create a new imagick object and read in GIF */
-$image = new Gmagick('base.jpeg');
-
-/* Notice writeImages instead of writeImage */
-
-?>
 
 </body>
 </html>

@@ -1,121 +1,163 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<!-- Mirrored from www.imaginemthemes.com/demo/echoes/echoes-classic/fullwidth.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 06 May 2010 16:30:36 GMT -->
+<head>
+<title>LAMOS - INPE  -  HOME</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/ddsmoothmenu.css" rel="stylesheet" type="text/css" />
+
+<!--[if lte IE 6]>
+	<link rel="stylesheet" type="text/css" href="css/ie6.css" media="screen" />
+<![endif]-->
+
+<!--[if IE 7]>
+	<link rel="stylesheet" type="text/css" href="css/ie7.css" media="screen" />
+<![endif]-->
+
+<script type="text/javascript" src="js/menu/ddsmoothmenu.js">
+/***********************************************
+* Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/
+</script>
+
+</head>
+
 <body>
 
+<div id="pagecontainer"> <!-- Outside Container -->
+	<div id="mainpage"> 
+		<div id="header"> 
+			<div id="smoothmenu1" class="ddsmoothmenu"><!-- The Menu -->
+				<ul>
+					<!-- Menu Single Item -->
+					<li><a href="index.php">Home</a></li>
+					<li><a href="contato.html">Contato</a></li>
+				</ul>
+				<br style="clear: left" />
+			</div>
+			<!-- End of Menu -->
+			
+			<div id="logo"><a href="index.php"><img src="images/logo.png" alt="logo" /></a></div>
+		</div> <!-- Close Header -->
+		
+		
+		<!-- carregar as variaveis do php -->
+        <?php include "dir_loader.php"?>
+        <?php include "camada.php"?>
 
-<?php include "dir_loader.php"?>
-<?php include "camada.php"?>
+		<div id="fullwidth-categorytitle">
+			<table class="studiotable">
+				<form name="myform" action="index.php" method="GET">
+				    <tr>
+					    <th>Data</th>
+					    <th>Região</th>
+					    <th>Hora</th>
+					    <th>Nível</th>
+					    <th></th>
+				    </tr>
+				    <tr>
+					    <td>
+					        <select name="Data">
+                                <?php
+                                    #ler diretorio com as datas
+                                    foreach ($dir_data as &$elemento )
+                                    { 
+                                        echo '<option value="'.$elemento.'">'.$elemento.'</option>';
+                                    }
+                                ?>
+                            </select>
+					    </td>
+					    <td>
+					        <select name="Regiao">
+                                <?php
+                                    #ler diretorio com as regioes
+                                    foreach ($dir_regiao as &$elemento )
+                                    { 
+                                        echo '<option value="'.$elemento.'">'.$elemento.'</option>';
+                                    }
+                                ?>
+                            </select>
+					    </td>
+					    <td>
+					        <select name="Hora">
+                                <?php
+                                    #ler diretorio com as regioes
+                                    foreach ($dir_hora as &$elemento )
+                                    { 
+                                        echo '<option value="'.$elemento.'">'.$elemento.'</option>';
+                                    }
+                                ?>
+                            </select>
+					    </td>
+					    <td>
+					        <select name="Nivel">
+                                <?php
+                                    #ler diretorio com as regioes
+                                    foreach ($dir_nivel as &$elemento )
+                                    { 
+                                        echo '<option value="'.$elemento.'">'.$elemento.'</option>';
+                                    }
+                                ?>
+                            </select> 
+					    </td>
+					    <td>
+					    
+					    </td>
+				    </tr>
+				    <tr>
+					    <th>Primeira cor</th>
+					    <th>Segunda cor</th>
+					    <th>Primeiro contorno</th>
+					    <th>Segundo contorno</th>
+					    <th>Vetor</th>
+				    </tr>
+				<?php
+				include "camada.php";
+				    #codigo para gerar os radio buttons
+				    $i=0;
+				    $j=0;
+				    for ($i = 0; $i<$tamanho_maior_vetor; $i++)
+				    {
+				        
+				        echo '<tr>';
+				        for ($j = 0; $j<sizeof($camada); $j++)
+				        {
+				            $nome_grupo=$camada[$j];
+				            echo '<td>';
+				            if (isset($camadas[$j][$i]))
+				            {
+				                echo '<input type="radio" name="'.$nome_grupo.'" value="'.$camadas[$j][$i].'">'.$camadas[$j][$i];
+				            }
+				            echo '</td>';
+				        }
+				        echo '</tr>';
+				    }
+				
+				?>
+				
+					
+				
+			</table>
+				<input type="submit" value="Send me your name!">
+			</form>
+		</div>
 
-
-<?php echo 'Manipulador'?>
-
-    <form name="combinador" action="index.php" method="get">
-        <select name="Data">
-            <?php
-                #ler diretorio com as datas
-                foreach ($dir_data as &$elemento )
-                { 
-                    echo '<option value="'.$elemento.'">'.$elemento.'</option>';
-                }
-            ?>
-        </select>
-        <select name="Regiao">
-            <?php
-                #ler diretorio com as regioes
-                foreach ($dir_regiao as &$elemento )
-                { 
-                    echo '<option value="'.$elemento.'">'.$elemento.'</option>';
-                }
-            ?>
-        </select>
-        <select name="Hora">
-            <?php
-                #ler diretorio com as regioes
-                foreach ($dir_hora as &$elemento )
-                { 
-                    echo '<option value="'.$elemento.'">'.$elemento.'</option>';
-                }
-            ?>
-        </select>
-        <select name="Nivel">
-            <?php
-                #ler diretorio com as regioes
-                foreach ($dir_nivel as &$elemento )
-                { 
-                    echo '<option value="'.$elemento.'">'.$elemento.'</option>';
-                }
-            ?>
-        </select>               
-        
-
-            <?php 
-                foreach ($camada1 as &$elemento )
-                { 
-                   
-                    echo '<input type="radio" value="'.$elemento.'" name="group1">'.$elemento;
-                }
-            ?>
-      
-        <select name="camada">
-            <?php 
-                foreach ($arquivoscamada as &$elemento )
-                { 
-                    echo '<option value="'.$elemento.'">'.$elemento.'</option>';
-                }
-            ?>
-        </select>
-        <select name="camada2">
-            <?php 
-                foreach ($arquivoscamada as &$elemento )
-                { 
-                    echo '<option value="'.$elemento.'">'.$elemento.'</option>';
-                }
-            ?>
-        </select>
-        
-        <input type="hidden" name="tempo" value="<?php echo time() ?>">
-
-        <input name="submitb" type="submit" value="Submit">
-    </form>
-
-<?php 
-    if (isset($_GET['submitb'])) 
-    {
-        $dir = $_SERVER['DOCUMENT_ROOT'];
-        if (strcmp($_GET['camada'],"")==0){
-            $frame = '/camada/clean.png';
-        }
-        else{
-            $frame = '/camada/'.$_GET['camada'];
-        }
-        
-        if (strcmp($_GET['camada2'],"")==0){
-            $frame2 = '/camada/clean.png';
-        }
-        else{
-            $frame2 = '/camada/'.$_GET['camada2'];
-        }
-        #$frame = '/camada/frame.png';
-        #$base = '/base/base.jpeg';
-        $base = '/base/'.$_GET['base'];
-        $saida = '/temp/'.$_GET['tempo'].$_SERVER['REMOTE_ADDR'].'.jpg';       
-        include "combiner.php";
-    }
-    if (isset($_GET['tempo']))
-    {
-        echo "<img src='$saida' alt='some_text' width='400' height='400'>";
-    
-    }
-    
-    #$gl = new Imagick(); 
-
-    #$bgImage = new Imagick('camada.gif');
-    #echo ($_SERVER['DOCUMENT_ROOT'] . '/camada.gif');
-    #$image = new Imagick($_SERVER['DOCUMENT_ROOT'] . '/camada.gif');
-    
-    
-?> 
-
-
+	<!-- Footer start -->
+	
+		<div id="footerbarwrap">
+		<ul>
+			<li>Copyright © webmaster. All rights reserved. </li>
+			<li>INPE - LAMOS</li>	</ul>
+		</div>
+	</div>
+</div> <!-- Close Container -->
+<script type="text/javascript"> Cufon.now(); </script>
 </body>
+
+<!-- Mirrored from www.imaginemthemes.com/demo/echoes/echoes-classic/fullwidth.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 06 May 2010 16:30:39 GMT -->
 </html>

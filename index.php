@@ -18,12 +18,14 @@
 <![endif]-->
 
 <script type="text/javascript" src="js/menu/ddsmoothmenu.js">
+
 /***********************************************
 * Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
 * This notice MUST stay intact for legal use
 * Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
 ***********************************************/
 </script>
+<script type="text/javascript" src="js/util/util.js"></script>
 
 </head>
 
@@ -51,14 +53,13 @@
         <?php include "camada.php"?>
 
 		<div id="fullwidth-categorytitle">
-			<table class="studiotable">
+			<table id="mainform" class="studiotable">
 				<form name="myform" action="index.php" method="GET">
 				    <tr>
 					    <th>Data</th>
 					    <th>Região</th>
 					    <th>Hora</th>
 					    <th>Nível</th>
-					    <th></th>
 				    </tr>
 				    <tr>
 					    <td>
@@ -105,10 +106,10 @@
                                 ?>
                             </select> 
 					    </td>
-					    <td>
-					    
-					    </td>
 				    </tr>
+			</table>
+			<table id="mainform2" class="studiotable">
+			
 				    <tr>
 					    <th>Primeira cor</th>
 					    <th>Segunda cor</th>
@@ -143,8 +144,12 @@
 					
 				
 			</table>
-				<input type="submit" value="Send me your name!">
+			    
+				<input type="submit" value="Gerar!">
 			</form>
+			<button onclick="showhide(1)">Hide</button>
+		    <button onclick="showhide(2)">Show</button>
+		        
 		</div>
 
 	<!-- Footer start -->

@@ -1,17 +1,60 @@
-<?php 
+<?php ?
     #$dir_data -> diretorio com as datas
     #dir_regiao -> diretorio com as regioes
     #dir_hora -> diretorio com as horas
     #dir_nivel -> diretorio com os niveis
+>
+
+<?php
+    // Note que !== não existia antes do PHP 4.0.0-RC2
+
+    $arquivosbase = array();
+
+    if ($handle = opendir('base/')) {
+
+        /* Esta é a forma correta de varrer o diretório */
+        $i = 0;
+        while (false !== ($file = readdir($handle))) {
+            #echo "$file\n";
+            if (strcmp($file,".")!=0 and strcmp($file,"..")!=0)
+            {
+                $arquivosbase[$i]=$file;
+                $i+=1;
+            } 
+        }
+        closedir($handle);
+    }
 ?>
 
+<?php
+    // Note que !== não existia antes do PHP 4.0.0-RC2
+    $arquivoscamada = array();
 
+    if ($handle = opendir('camada/')) {
+
+        /* Esta é a forma correta de varrer o diretório */
+        $i = 0;
+        while (false !== ($file = readdir($handle))) {
+            #echo "$file\n";
+            if (strcmp($file,".")!=0 and strcmp($file,"..")!=0)
+            {
+                if (strcmp($file,"clean.png")==0){
+                    $arquivoscamada[$i]="";
+                }
+                else{
+                    $arquivoscamada[$i]=$file;
+                }
+                $i+=1;
+            } 
+        }
+        closedir($handle);
+    }
+?>
 
 <?php
     // Note que !== não existia antes do PHP 4.0.0-RC2
     // Ler o diretorio com as datas
     $dir_data = array();
-    $dir_base = array();
     $dir_leitura='imagem/';
     if ($handle = opendir($dir_leitura)) {
         /* Esta é a forma correta de varrer o diretório */
@@ -24,10 +67,7 @@
                     $dir_data[$i]="";
                 }
                 else{
-                    if ((strpos($file,'base') !== false) or (strpos($file,'clean') !== false)) 
-                        array_push($dir_base,$file);
-                    else
-                        array_push($dir_data,$file);
+                    $dir_data[$i]=$file;
                 }
                 $i+=1;
             } 

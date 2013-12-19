@@ -1,13 +1,14 @@
 <?php
     try
         { 
-            // Verificando se o Imagick está instalado 
+            // Let's check whether we can perform the magick. 
             if (TRUE !== extension_loaded('imagick')) 
             { 
                 throw new Exception('Imagick extension is not loaded.'); 
             } 
 
-            // Verificando se Imagick esta instalado forma 2 
+            // This check is an alternative to the previous one. 
+            // Use the one that suits you better. 
             if (TRUE !== class_exists('Imagick')) 
             { 
                 throw new Exception('Imagick class does not exist.'); 
@@ -40,6 +41,8 @@
             else
                 $dirc5=$dir . '/imagem/clean/clean.png';
                 
+
+
             #ler as camadas e a base
             $camada_t2 = new Imagick(); 
             if (FALSE === $camada_t2->readImage($dirc2)) 
@@ -98,3 +101,5 @@
             echo 'Caught exception: ' . $e->getMessage() . "\n"; 
         } 
 ?>
+
+

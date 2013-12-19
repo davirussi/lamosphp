@@ -51,6 +51,7 @@
 		<!-- carregar as variaveis do php -->
         <?php include "dir_loader.php"?>
         <?php include "camada.php"?>
+        <?php include "processa.php"?>
 
 		<div id="fullwidth-categorytitle">
 			<table id="mainform" class="studiotable">
@@ -139,18 +140,27 @@
 				        echo '</tr>';
 				    }
 				
-				?>
-				
-					
-				
+				?>	
 			</table>
-			    
-				<input type="submit" value="Gerar!">
+			    <input type="hidden" name="tempo" value="<?php echo time() ?>">
+				<input name="submitb" type="submit" value="Gerar!">
 			</form>
 			<button onclick="showhide(1)">Hide</button>
 		    <button onclick="showhide(2)">Show</button>
 		        
 		</div>
+		
+		<?php 
+		    if (isset($_GET['tempo']))
+            {
+                echo '<div id="fullwidth-categorytitle">';
+                echo '<div id="imagem_centro"> ';
+                echo "<img src='$saida' class='displayed' border='0'>";
+                echo '</div></div>';
+            }
+		?>
+		
+
 
 	<!-- Footer start -->
 	

@@ -12,6 +12,8 @@
             { 
                 throw new Exception('Imagick class does not exist.'); 
             } 
+            //output_file_name
+            $saida = '/temp/'.$_GET['tempo'].$_SERVER['REMOTE_ADDR'].'.jpg'; 
 
             // criando os caminhos para os diretorios. 
             $dircb = $dir . '/imagem/' . $base .  '/base.png';

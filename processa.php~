@@ -31,14 +31,10 @@
         $base = 'base '.$regiao;
         $saida = '/temp/'.$_GET['tempo'].$_SERVER['REMOTE_ADDR'].'.jpg'; 
         
-        #depois de tudo setado chamar o combinador de imagem      
-        include "combiner.php";
+        #depois de tudo setado chamar o combinador de imagem  
+        if (strcmp($hora,"Loop")!=0 )    
+            include "combiner.php";
+        else
+            include "combinerloop.php";
     }
-    if (isset($_GET['tempo']))
-    {
-        echo "<img src='$saida' alt='some_text' width='400' height='400'>";
-    
-    }    
-    
-    //Data=data1&Regiao=America+do+Sul&Hora=Hora+12&Nivel=40+hPa&camada1=Nenhum&camada4=Nenhum&camada2=Wind+Speeds&camada3=Wind+Speeds&camada5=Wind+Barbs
 ?> 

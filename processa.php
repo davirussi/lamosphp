@@ -29,9 +29,11 @@
         }
         
         $base = 'base '.$regiao;
-        $saida = '/temp/'.$_GET['tempo'].$_SERVER['REMOTE_ADDR'].'.jpg'; 
         
-        #depois de tudo setado chamar o combinador de imagem      
-        include "combiner.php";
+        #depois de tudo setado chamar o combinador de imagem  
+        if (strcmp($hora,"Loop")!=0 )    
+            include "combiner.php";
+        else
+            include "combinerloop.php";
     }
 ?> 

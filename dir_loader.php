@@ -5,8 +5,6 @@
     #dir_nivel -> diretorio com os niveis
 ?>
 
-
-
 <?php
     // Note que !== não existia antes do PHP 4.0.0-RC2
     // Ler o diretorio com as datas
@@ -34,6 +32,7 @@
         }
         closedir($handle);
     }
+    sort($dir_data);
 ?>
 
 <?php
@@ -59,6 +58,7 @@
         }
         closedir($handle);
     }
+    sort($dir_regiao);
 ?>
 
 <?php
@@ -84,6 +84,8 @@
         }
         closedir($handle);
     }
+    sort($dir_hora);
+    $dir_hora[count($dir_hora)]='Loop';
 ?>
 
 <?php
@@ -109,4 +111,5 @@
         }
         closedir($handle);
     }
+    sort($dir_nivel);
 ?>

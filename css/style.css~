@@ -782,7 +782,7 @@ table.studiotable td {
 	}
 
 
-
+/*------------ Imagem Central ---------------------*/
 #imagem_centro {
     text-align:center;
 }
@@ -792,6 +792,25 @@ img.displayed{
     height: 50%;
     width: 50%;
     overflow: hidden;
+}
+
+/*------------ Imagem Central Loop ----------------*/
+
+#simplegallery1{ //CSS for sample Gallery
+position: relative;
+visibility: hidden;
+border: 10px solid darkred;
+}
+
+#simplegallery2{ //CSS for sample Gallery
+position: relative;
+visibility: hidden;
+border: 5px solid black;
+}
+
+#simplegallery2 .gallerydesctext{ //CSS for description DIV of Example 1 (if defined)
+text-align: left;
+padding: 2px 5px;
 }
 
 /* -------- Footer -------- */

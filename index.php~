@@ -26,7 +26,8 @@
 ***********************************************/
 </script>
 <script type="text/javascript" src="js/util/util.js"></script>
-
+<script type="text/javascript" src="js/slide/jquery.min.js"></script>
+<script type="text/javascript" src="js/slide/simplegallery.js"></script>
 </head>
 
 <body>
@@ -150,14 +151,77 @@
 		        
 		</div>
 		
-		<?php 
-		    if (isset($_GET['tempo']))
+		<?php
+		    #gerar titulo da imagem
+		    $titulo = $_GET['Regiao'].' - '.$_GET['Data'].' - '.$_GET['Nivel'].' - '.$_GET['Hora'].'<br>';
+		    if (strcmp($camada1,"clean.png")!=0)
+		        $titulo.=$camada1;
+		    if (strcmp($camada2,"clean.png")!=0)
+		        $titulo.=' '.$camada2;
+		    if (strcmp($camada3,"clean.png")!=0)
+		        $titulo.=' '.$camada3;	
+		    if (strcmp($camada4,"clean.png")!=0)
+		        $titulo.=' '.$camada4;	
+		    if (strcmp($camada5,"clean.png")!=0)
+		        $titulo.=' '.$camada5;		         
+		    if (isset($_GET['tempo']) and strcmp($_GET['Hora'],"Loop")!=0)
             {
                 echo '<div id="fullwidth-categorytitle">';
                 echo '<div id="imagem_centro"> ';
-                echo "<img src='$saida' class='displayed' border='0' width='400' height='400'>";
+                echo "<table cellpadding='3' class='studiotable'>";
+                echo "<tr>";
+                echo  "<th align='center'>".$titulo."</th>";
+                echo  "</tr>";
+                echo      "<tr>";
+                echo       " <td>";
+                echo          "<img src='$saida' name='show' class='displayed' border='0'>";
+                echo       " </td>";
+                echo      "</tr>";
+
+                echo '<tr><td>';
+                #echo "<img src='$saida' class='displayed' border='0'>";
                 echo '</div></div>';
             }
+            elseif (isset($_GET['tempo']) and strcmp($_GET['Hora'],"Loop")==0)
+            {
+                echo '<div id="fullwidth-categorytitle">';
+                echo '<div id="imagem_centro">';
+                echo '<form name="ff">';
+                echo "<table cellpadding='3' class='studiotable'>";
+                echo "<tr>";
+                echo  "<th align='center'>".$_GET['Regiao']."</th>";
+                echo  "</tr>";
+                echo      "<tr>";
+                echo       " <td>";
+                echo          "<img src='$saida_array[0]' name='show' class='displayed' border='0'>";
+                echo       " </td>";
+                echo      "</tr>";
+
+                echo '<tr><td>';
+                echo "<select name='slide' onChange='rotate(this.selectedIndex);'>";
+                $k=0;
+                foreach ($saida_array as &$elemento )
+                { 
+                    echo '<option value="'.$elemento.'">'.$dir_hora[$k].'</option>';
+                    $k++;
+                }
+                echo '</select>';
+                echo '</td></tr>';
+                
+                echo "
+                    <tr><td>
+                    <input type='button' onclick='rotate(0);' value='ll&lt;&lt;' title='Ir para o Início' />
+                    <input type='button' onclick='rotate(x-1);' value='&lt;&lt;' title='Anterior' />
+                    
+                    <input type='button' name=\"fa\" onClick=\"this.value=((this.value=='Stop')?'Start':'Stop');auto();\" value=\"Start\" title=\"Autoplay\" style=\"width:75px;\" >
+                    
+                    <input type='button' onclick='rotate(x+1);' value='&gt;&gt;' title='Próximo' />
+                    <input type='button' onclick='rotate(this.form.slide.length-1);' value='&gt;&gt;ll' title='Ir para o Final' />
+                    </td></tr></table></form>
+                    </div></div>";  
+            }
+              
+            
 		?>
 		
 
